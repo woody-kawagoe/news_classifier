@@ -1,0 +1,8 @@
+<h1>URL入力画面</h1>
+
+<form action="{% url 'naive_bayes:classifier' %}" method="post">
+{% csrf_token %}
+    <input type="text" name="url" id="url" value="" />
+    <label >GunosyのニュースのURLを入力して下さい</label><br />
+<input type="submit" value="url" />
+</form>
