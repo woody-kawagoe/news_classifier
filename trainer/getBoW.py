@@ -1,7 +1,7 @@
 import sys
 import MeCab
 from urllib.request import urlopen
-from urllib.error import HTTPError
+from urllib.error import HTTPError,URLError
 from bs4 import BeautifulSoup as BS
 
 
@@ -9,7 +9,10 @@ def getArticle(url):
     try:
         html=urlopen(url)
     except HTTPError as e:
-        print(e)
+        #print(e)
+        return 0
+    except URLError as e:
+        #print(e)
         return 0
     else:
         bsObj=BS(html.read(),"html.parser")
@@ -53,8 +56,10 @@ def getBoW(text,tagger):
 argvs=sys.argv
 url=argvs[1]
 article=getArticle(url)
-#tagger=MeCab.Tagger("-Ochasen -u foo.dic -d /usr/local/Cellar/mecab/0.996/lib/mecab/dic/mecab-ipadic-neologd")
-tagger=MeCab.Tagger("-Ochasen -d /usr/lib64/mecab/dic/mecab-ipadic-neologd")
-BoW=getBoW(article,tagger)
-for w in BoW:
-    print(w,end=" ")
+if not article is 0:
+    tagger=MeCab.Tagger("-Ochasen -d /usr/lib64/mecab/dic/mecab-ipadic-neologd")
+    BoW=getBoW(article,tagger)
+    for w in BoW:
+        print(w,end=" ")
+else:
+    print("Error")
