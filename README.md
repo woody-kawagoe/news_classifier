@@ -1,6 +1,6 @@
 # Usage
 
-(domain)/naive\_bayesにアクセスするとフォーム画面が表示される。
+(IPアドレス)/naive\_bayesにアクセスするとフォーム画面が表示される。
 フォームにGunosyのニュースのURLを入力すると分類結果画面に遷移する。
 
 # Packages
@@ -10,6 +10,7 @@
 + mecab 0.996
 + mecab-ipadic-neologd
 + python-mecab3 0.7
++ beautifulsoup4 4.5.1
 
 # View
 
