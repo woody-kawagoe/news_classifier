@@ -1,9 +1,9 @@
+# Gunosyのニュース記事のURLを指定すると、その記事のBoWを返す
 import sys
 import MeCab
 from urllib.request import urlopen
 from urllib.error import HTTPError,URLError
 from bs4 import BeautifulSoup as BS
-
 
 def getArticle(url):
     try:
