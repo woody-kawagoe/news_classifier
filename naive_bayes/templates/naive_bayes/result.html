@@ -1,4 +1,25 @@
 <h1>分類結果</h1>
 
-<h2>記事カテゴリ</h2>
-{{ category }}
+<h2>推定カテゴリ</h2>
+
+<p>{{ category }}</p>
+
+<h2>各カテゴリの推定スコア一覧</h2>
+
+<table>
+<tr>
+<th>カテゴリ名</th>
+<th>スコア</th>
+{% for key,val in P %}
+<tr>
+    <td>{{ key }}</td>
+    <td>{{ val}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h2>解析URL</h2>
+
+<p>{{ url }}</p>
+
+<a href="/naive_bayes/">formに戻る</a>
