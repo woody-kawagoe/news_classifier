@@ -61,5 +61,3 @@ if not article is 0:
     BoW=getBoW(article,tagger)
     for w in BoW:
         print(w,end=" ")
-else:
-    print("Error")
