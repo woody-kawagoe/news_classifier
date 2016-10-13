@@ -1,0 +1,4 @@
+*.pyc
+naive_bayes/__pycache__/
+naive_bayes/migrations/__pycache__/
+news_classifier/__pycache__/
