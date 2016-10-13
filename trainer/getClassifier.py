@@ -1,8 +1,6 @@
 # ニュースのBoWから分類器を作成する
-from subprocess import Popen, PIPE
-from urllib.request import urlopen
-from urllib.error import HTTPError
-from bs4 import BeautifulSoup as BS
+# 分類器は単語word_i,カテゴリcatの確率log(P(word_i|cat))の一覧である
+# なお単語の出現回数に1を加えるラプラススムージングを行っている
 import os.path
 import pandas as pd
 import math
