@@ -57,7 +57,8 @@ argvs=sys.argv
 url=argvs[1]
 article=getArticle(url)
 if not article is 0:
-    tagger=MeCab.Tagger("-Ochasen -d /usr/lib64/mecab/dic/mecab-ipadic-neologd")
+    #tagger=MeCab.Tagger("-Ochasen -d /usr/lib64/mecab/dic/mecab-ipadic-neologd")
+    tagger=MeCab.Tagger("-Ochasen")
     BoW=getBoW(article,tagger)
     for w in BoW:
         print(w,end=" ")
