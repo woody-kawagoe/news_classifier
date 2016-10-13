@@ -8,14 +8,14 @@ import pandas as pd
 import math
 
 categories=[
-    "entertainment",
-    "sports",
-    "omosiro",
-    "domestic",
-    "oveasea",
-    "column",
-    "technology",
-    "gourmet"
+    "エンタメ",
+    "スポーツ",
+    "おもしろ",
+    "国内",
+    "海外",
+    "コラム",
+    "IT・科学",
+    "グルメ"
 ]
 
 def getWordcount(name):

@@ -6,14 +6,14 @@ from bs4 import BeautifulSoup as BS
 import os.path
 
 categories=[
-    ["1","entertainment"],
-    ["2","sports"],
-    ["3","omosiro"],
-    ["4","domestic"],
-    ["5","oveasea"],
-    ["6","column"],
-    ["7","technology"],
-    ["8","gourmet"]
+    ["1","エンタメ"],
+    ["2","スポーツ"],
+    ["3","おもしろ"],
+    ["4","国内"],
+    ["5","海外"],
+    ["6","コラム"],
+    ["7","IT・科学"],
+    ["8","グルメ"]
 ]
 
 def getNews(newslist):
