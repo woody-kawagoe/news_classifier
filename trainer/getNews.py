@@ -27,17 +27,18 @@ def getNews(newslist):
         news = news+bow+"\n"
     return news
 
-for id, name in categories:
-    print(id, name)
-    path = 'trainer/newslist/'+name+'.csv'
-    if os.path.exists(path):
-        newslist = list(map(lambda x: x[:-1], open(path, 'r').readlines()))
-    else:
-        print("not found!", path)
-    path = 'trainer/news/'+name+'.csv'
-    if os.path.exists(path):
-        if len(open(path, 'r').readlines()) is 100:
-            print("already get", name, "100 news")
-    else:
-        news = getNews(newslist)
-        open(path, 'w').write(news)
+if __name__ == "__main__":
+    for id, name in categories:
+        print(id, name)
+        path = 'trainer/newslist/'+name+'.csv'
+        if os.path.exists(path):
+            newslist = list(map(lambda x: x[:-1], open(path, 'r').readlines()))
+        else:
+            print("not found!", path)
+        path = 'trainer/news/'+name+'.csv'
+        if os.path.exists(path):
+            if len(open(path, 'r').readlines()) is 100:
+                print("already get", name, "100 news")
+        else:
+            news = getNews(newslist)
+            open(path, 'w').write(news)

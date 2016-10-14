@@ -45,16 +45,17 @@ def getNewslist(id, newslist):
             print(page, len(newslist), news_link)
     return newslist
 
-for id, name in categories:
-    print(id, name)
-    path = 'trainer/newslist/'+name+'.csv'
-    if os.path.exists(path):
-        newslist = list(map(lambda x: x[:-1], open(path, 'r').readlines()))
-        newslist = getNewslist(id, newslist)
-    else:
-        newslist = getNewslist(id, [])
-    with open(path, 'w') as output:
-        for url in newslist:
-            output.write(url+'\n')
-        print(name, "finish!")
-        print("news length:", len(newslist))
+if __name__ == "__main__":
+    for id, name in categories:
+        print(id, name)
+        path = 'trainer/newslist/'+name+'.csv'
+        if os.path.exists(path):
+            newslist = list(map(lambda x: x[:-1], open(path, 'r').readlines()))
+            newslist = getNewslist(id, newslist)
+        else:
+            newslist = getNewslist(id, [])
+        with open(path, 'w') as output:
+            for url in newslist:
+                output.write(url+'\n')
+            print(name, "finish!")
+            print("news length:", len(newslist))

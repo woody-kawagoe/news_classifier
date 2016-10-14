@@ -53,11 +53,12 @@ def getBoW(text, tagger):
             nouns.append(line[2])
     return nouns
 
-argvs = sys.argv
-url = argvs[1]
-article = getArticle(url)
-if article is not 0:
-    tagger = MeCab.Tagger("-Ochasen")
-    BoW = getBoW(article, tagger)
-    for w in BoW:
-        print(w, end=" ")
+if __name__ == "__main__":
+    argvs = sys.argv
+    url = argvs[1]
+    article = getArticle(url)
+    if article is not 0:
+        tagger = MeCab.Tagger("-Ochasen")
+        BoW = getBoW(article, tagger)
+        for w in BoW:
+            print(w, end=" ")
