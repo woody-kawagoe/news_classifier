@@ -38,7 +38,7 @@ def getNewslistByCategory(id, newslist):
                     .find("a").attrs["href"]
                 if news_link not in newslist:
                     newslist.append(news_link)
-                if len(newslist) is news_number:
+                if len(newslist) == news_number:
                     break
             page = bsObj.find("div", {"class": "pager-link-option"})\
                 .find("a").attrs["href"]
