@@ -14,21 +14,19 @@ def result(request):
     bow = trainer.getBoW.getBoW(url)
     classifier = pd.read_csv("trainer/classifier.csv", index_col=0)
     categories = classifier.columns
-    P = {}
-    for name in categories:
-        P[name] = 0.
+    P = {category: 0 for for category in categories}
     for word in bow:
-        for name in categories:
+        for category in categories:
             if word in classifier.index:
-                P[name] += classifier.ix[word, name]
+                P[category] += classifier.ix[word, category]
     P = sorted(P.items(), key=lambda x: x[1], reverse=True)
     if P[0][1] is 0.0:
-        category = "Error"
+        result_category = "Error"
     else:
-        category = P[0][0]
+        result_category = P[0][0]
     context = {
         'P': P,
-        'category': category,
+        'category': result_category,
         'url': url
         }
     return render(request, 'naive_bayes/result.html', context)
