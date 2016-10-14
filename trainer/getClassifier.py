@@ -31,7 +31,8 @@ def getWordcount(name):
         print("not found!", path)
     return wordcount
 
-if __name__ == "__main__":
+
+def getClassifier():
     wordcount = {}
     words = []
     for name in categories:
@@ -52,3 +53,6 @@ if __name__ == "__main__":
             classifier.ix[word, name] = math.log((count+1)/cat_len)
     classifier.to_csv("trainer/classifier.csv")
     print("finish output csv")
+
+if __name__ == "__main__":
+    getClassifier()

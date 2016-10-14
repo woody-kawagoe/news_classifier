@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-import trainer.getBow
+import trainer.getBoW
 import pandas as pd
 
 
@@ -14,7 +14,7 @@ def result(request):
     bow = trainer.getBoW.getBoW(url)
     classifier = pd.read_csv("trainer/classifier.csv", index_col=0)
     categories = classifier.columns
-    P = {category: 0 for for category in categories}
+    P = {category: 0 for category in categories}
     for word in bow:
         for category in categories:
             if word in classifier.index:

@@ -14,7 +14,7 @@ categories = [
 ]
 
 
-def getNews(newslist):
+def getNewsByList(newslist):
     news = ""
     for news_url in newslist:
         bow = trainer.getBoW.getBoW(news_url)
@@ -22,7 +22,8 @@ def getNews(newslist):
         news = news+bow+"\n"
     return news
 
-if __name__ == "__main__":
+
+def getNews():
     for id, name in categories:
         print(id, name)
         path = 'trainer/newslist/'+name+'.csv'
@@ -35,5 +36,8 @@ if __name__ == "__main__":
             if len(open(path, 'r').readlines()) is 100:
                 print("already get", name, "100 news")
         else:
-            news = getNews(newslist)
+            news = getNewsByList(newslist)
             open(path, 'w').write(news)
+
+if __name__ == "__main__":
+    getNews()
