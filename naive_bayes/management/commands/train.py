@@ -3,6 +3,7 @@ import trainer.getNewslist
 import trainer.getNews
 import trainer.getClassifier
 
+
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
