@@ -1,5 +1,5 @@
 # ニュースのURLリストを元に、各カテゴリのニュースのBoWを取得する
-from subprocess import Popen, PIPE
+import trainer.getBow
 import os.path
 
 categories = [
@@ -17,12 +17,7 @@ categories = [
 def getNews(newslist):
     news = ""
     for news_url in newslist:
-        p = Popen(["python", "trainer/getBoW.py", news_url], stdout=PIPE)
-        c = p.stdout.readlines()
-        if c:
-            bow = c[0].decode('utf-8')
-        else:
-            bow = ""
+        bow = trainer.getBoW.getBoW(news_url)
         print(news_url, bow[:10], "...")
         news = news+bow+"\n"
     return news

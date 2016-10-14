@@ -1,7 +1,7 @@
-from subprocess import Popen, PIPE
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+import trainer.getBow
 import pandas as pd
 
 
@@ -11,12 +11,7 @@ def form(request):
 
 def result(request):
     url = request.POST['url']
-    p = Popen(["python", "trainer/getBoW.py", url], stdout=PIPE)
-    c = p.stdout.readlines()
-    if c:
-        bow = c[0].decode('utf-8').split(" ")
-    else:
-        bow = []
+    bow = trainer.getBoW.getBoW(url)
     classifier = pd.read_csv("trainer/classifier.csv", index_col=0)
     categories = classifier.columns
     P = {}

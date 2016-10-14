@@ -44,7 +44,7 @@ def validate(node, line):
     return False
 
 
-def getBoW(text, tagger):
+def getWords(text, tagger):
     nodes = tagger.parse(text)
     nouns = []
     for node in nodes.splitlines()[:-1]:
@@ -53,12 +53,19 @@ def getBoW(text, tagger):
             nouns.append(line[2])
     return nouns
 
-if __name__ == "__main__":
-    argvs = sys.argv
-    url = argvs[1]
+
+def getBoW(url):
     article = getArticle(url)
     if article is not 0:
         tagger = MeCab.Tagger("-Ochasen")
-        BoW = getBoW(article, tagger)
-        for w in BoW:
-            print(w, end=" ")
+        BoW = getWords(article, tagger)
+        return BoW
+    else:
+        return []
+
+if __name__ == "__main__":
+    argvs = sys.argv
+    url = argvs[1]
+    BoW = getBoW(url)
+    for w in BoW:
+        print(w, end=" ")
