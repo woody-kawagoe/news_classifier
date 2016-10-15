@@ -1,20 +1,18 @@
 # Gunosyのニュース記事のURLを指定すると、その記事のBoWを返す
 import sys
 import MeCab
-from urllib.request import urlopen
-from urllib.error import HTTPError, URLError
+import requests
+from requests.exceptions import RequestException
 from bs4 import BeautifulSoup as BS
 
 
 def getArticle(url):
     try:
-        html = urlopen(url)
-    except HTTPError as e:
-        return 0
-    except URLError as e:
+        html = requests.get(url)
+    except RequestException:
         return 0
     else:
-        bsObj = BS(html.read(), "html.parser")
+        bsObj = BS(html.text, "html.parser")
         article = bsObj.find("div", {"class", "article"}).get_text()
         return article
 

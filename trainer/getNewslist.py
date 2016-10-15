@@ -1,8 +1,9 @@
 # 各カテゴリのニュース記事のURLを取得する
-from urllib.request import urlopen
-from urllib.error import HTTPError
-from bs4 import BeautifulSoup as BS
 import os.path
+import requests
+from requests.exceptions import RequestException
+from bs4 import BeautifulSoup as BS
+
 
 categories = [
     ["1", "エンタメ"],
@@ -26,11 +27,11 @@ def getNewslistByCategory(id, newslist):
     while len(newslist) < news_number:
         url = start_url+page
         try:
-            html = urlopen(url)
-        except HTTPError as e:
+            html = requests.get(url)
+        except RequestExceptiona as e:
             print(e)
         else:
-            bsObj = BS(html.read(), "html.parser")
+            bsObj = BS(html.text, "html.parser")
             article_list = bsObj.find("div", {"class": "article_list"})\
                 .findAll("div", {"class": "list_content"})
             for article in article_list:
