@@ -1,5 +1,5 @@
 # ニュースのURLリストを元に、各カテゴリのニュースのBoWを取得する
-import trainer.getBow
+import trainer.getBoW
 import os.path
 
 categories = [
@@ -19,7 +19,7 @@ def getNewsByList(newslist):
     for news_url in newslist:
         bow = trainer.getBoW.getBoW(news_url)
         print(news_url, bow[:10], "...")
-        news = news+bow+"\n"
+        news = news+" ".join(bow)+"\n"
     return news
 
 
