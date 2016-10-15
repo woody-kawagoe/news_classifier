@@ -4,17 +4,7 @@
 import os.path
 import pandas as pd
 import math
-
-categories = [
-    "エンタメ",
-    "スポーツ",
-    "おもしろ",
-    "国内",
-    "海外",
-    "コラム",
-    "IT・科学",
-    "グルメ"
-]
+import trainer.const
 
 
 def getWordcount(name):
@@ -35,6 +25,7 @@ def getWordcount(name):
 def getClassifier():
     wordcount = {}
     words = []
+    categories = list(map(lambda x: x[1], trainer.const.categories))
     for name in categories:
         wordcount[name] = getWordcount(name)
         words.extend(getWordcount(name))

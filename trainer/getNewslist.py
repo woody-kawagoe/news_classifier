@@ -1,20 +1,9 @@
 # 各カテゴリのニュース記事のURLを取得する
 import os.path
 import requests
+import trainer.const
 from requests.exceptions import RequestException
 from bs4 import BeautifulSoup as BS
-
-
-categories = [
-    ["1", "エンタメ"],
-    ["2", "スポーツ"],
-    ["3", "おもしろ"],
-    ["4", "国内"],
-    ["5", "海外"],
-    ["6", "コラム"],
-    ["7", "IT・科学"],
-    ["8", "グルメ"]
-]
 
 
 def getNewslistByCategory(id, newslist):
@@ -48,6 +37,7 @@ def getNewslistByCategory(id, newslist):
 
 
 def getNewslist():
+    categories = trainer.const.categories
     for id, name in categories:
         print(id, name)
         path = 'trainer/newslist/'+name+'.csv'

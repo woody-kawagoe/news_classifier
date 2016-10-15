@@ -1,17 +1,7 @@
 # ニュースのURLリストを元に、各カテゴリのニュースのBoWを取得する
 import trainer.getBoW
+import trainer.const
 import os.path
-
-categories = [
-    ["1", "エンタメ"],
-    ["2", "スポーツ"],
-    ["3", "おもしろ"],
-    ["4", "国内"],
-    ["5", "海外"],
-    ["6", "コラム"],
-    ["7", "IT・科学"],
-    ["8", "グルメ"]
-]
 
 
 def getNewsByList(newslist):
@@ -24,6 +14,7 @@ def getNewsByList(newslist):
 
 
 def getNews():
+    categories = trainer.const.categories
     for id, name in categories:
         print(id, name)
         path = 'trainer/newslist/'+name+'.csv'
