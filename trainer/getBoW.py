@@ -1,26 +1,23 @@
 # Gunosyのニュース記事のURLを指定すると、その記事のBoWを返す
 import sys
 import MeCab
-from urllib.request import urlopen
-from urllib.error import HTTPError,URLError
+import requests
+from requests.exceptions import RequestException
 from bs4 import BeautifulSoup as BS
+
 
 def getArticle(url):
     try:
-        html=urlopen(url)
-    except HTTPError as e:
-        #print(e)
-        return 0
-    except URLError as e:
-        #print(e)
+        html = requests.get(url)
+    except RequestException:
         return 0
     else:
-        bsObj=BS(html.read(),"html.parser")
-        article=bsObj.find("div",{"class","article"}).get_text()
-        #print(article)
+        bsObj = BS(html.text, "html.parser")
+        article = bsObj.find("div", {"class", "article"}).get_text()
         return article
 
-def validate(node,line):
+
+def validate(node, line):
     stop_words = [
             r'接尾',
             r'接頭',
@@ -44,21 +41,29 @@ def validate(node,line):
             return True
     return False
 
-def getBoW(text,tagger):
-    nodes=tagger.parse(text)
-    nouns=[]
+
+def getWords(text, tagger):
+    nodes = tagger.parse(text)
+    nouns = []
     for node in nodes.splitlines()[:-1]:
-        line = node.replace('-','\t').split('\t')
-        if validate(node,line):
+        line = node.replace('-', '\t').split('\t')
+        if validate(node, line):
             nouns.append(line[2])
     return nouns
 
-argvs=sys.argv
-url=argvs[1]
-article=getArticle(url)
-if not article is 0:
-    #tagger=MeCab.Tagger("-Ochasen -d /usr/lib64/mecab/dic/mecab-ipadic-neologd")
-    tagger=MeCab.Tagger("-Ochasen")
-    BoW=getBoW(article,tagger)
+
+def getBoW(url):
+    article = getArticle(url)
+    if article is not 0:
+        tagger = MeCab.Tagger("-Ochasen")
+        BoW = getWords(article, tagger)
+        return BoW
+    else:
+        return []
+
+if __name__ == "__main__":
+    argvs = sys.argv
+    url = argvs[1]
+    BoW = getBoW(url)
     for w in BoW:
-        print(w,end=" ")
+        print(w, end=" ")
